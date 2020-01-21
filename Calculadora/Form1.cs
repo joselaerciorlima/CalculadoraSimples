@@ -6,7 +6,8 @@ namespace Calculadora
    public partial class Form1 : Form
    {
       bool primeiroNumero = true;
-      double valorAnterior, valorAtual;
+      double valorAnterior = 0;
+      string ultimaOperacao;
       public Form1()
       {
          InitializeComponent();
@@ -89,6 +90,31 @@ namespace Calculadora
             primeiroNumero = false;
          }
          txtDisplay.Text += valor;
+      }
+      private void Operacao(string operador)
+      {
+         if (operador == "+")
+         {
+            valorAnterior += Convert.ToDouble(txtDisplay.Text);
+            primeiroNumero = true;
+            ultimaOperacao = "+";
+         }
+         else if (operador == "=")
+         {
+            valorAnterior += Convert.ToDouble(txtDisplay.Text);
+            txtDisplay.Text = valorAnterior.ToString();
+            valorAnterior = 0;
+         }
+      }
+
+      private void btnSomar_Click(object sender, EventArgs e)
+      {
+         Operacao("+");
+      }
+
+      private void btnResultado_Click(object sender, EventArgs e)
+      {
+         Operacao("=");
       }
    }
 }

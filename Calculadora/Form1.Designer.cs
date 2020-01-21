@@ -265,6 +265,7 @@
          this.btnSomar.TabIndex = 0;
          this.btnSomar.Text = "+";
          this.btnSomar.UseVisualStyleBackColor = false;
+         this.btnSomar.Click += new System.EventHandler(this.btnSomar_Click);
          // 
          // btnNegativo
          // 
@@ -293,6 +294,7 @@
          this.btnResultado.TabIndex = 0;
          this.btnResultado.Text = "=";
          this.btnResultado.UseVisualStyleBackColor = false;
+         this.btnResultado.Click += new System.EventHandler(this.btnResultado_Click);
          // 
          // btnDividir
          // 
