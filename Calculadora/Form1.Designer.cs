@@ -237,6 +237,7 @@
          this.btnVirgula.TabIndex = 0;
          this.btnVirgula.Text = ",";
          this.btnVirgula.UseVisualStyleBackColor = false;
+         this.btnVirgula.Click += new System.EventHandler(this.btnVirgula_Click);
          // 
          // btnSubtrair
          // 
@@ -251,6 +252,7 @@
          this.btnSubtrair.TabIndex = 0;
          this.btnSubtrair.Text = "-";
          this.btnSubtrair.UseVisualStyleBackColor = false;
+         this.btnSubtrair.Click += new System.EventHandler(this.btnSubtrair_Click);
          // 
          // btnSomar
          // 
@@ -280,6 +282,7 @@
          this.btnNegativo.TabIndex = 0;
          this.btnNegativo.Text = "+";
          this.btnNegativo.UseVisualStyleBackColor = false;
+         this.btnNegativo.Click += new System.EventHandler(this.btnNegativo_Click);
          // 
          // btnResultado
          // 
@@ -309,6 +312,7 @@
          this.btnDividir.TabIndex = 0;
          this.btnDividir.Text = "/";
          this.btnDividir.UseVisualStyleBackColor = false;
+         this.btnDividir.Click += new System.EventHandler(this.btnDividir_Click);
          // 
          // btnApagar
          // 
@@ -338,6 +342,7 @@
          this.btnMultiplicar.TabIndex = 0;
          this.btnMultiplicar.Text = "x";
          this.btnMultiplicar.UseVisualStyleBackColor = false;
+         this.btnMultiplicar.Click += new System.EventHandler(this.btnMultiplicar_Click);
          // 
          // btnLimpar
          // 

@@ -6,7 +6,7 @@ namespace Calculadora
    public partial class Form1 : Form
    {
       bool primeiroNumero = true;
-      double valorAnterior = 0;
+      double memoria = 0;
       string ultimaOperacao;
       public Form1()
       {
@@ -63,10 +63,45 @@ namespace Calculadora
          Input("9"); ;
       }
 
+      private void btnSomar_Click(object sender, EventArgs e)
+      {
+         Operacao("+");
+      }
+
+      private void btnResultado_Click(object sender, EventArgs e)
+      {
+         Operacao("=");
+      }
+
+      private void btnNegativo_Click(object sender, EventArgs e)
+      {
+         txtDisplay.Text = (Convert.ToDouble(txtDisplay.Text) * -1).ToString();
+      }
+
+      private void btnSubtrair_Click(object sender, EventArgs e)
+      {
+         Operacao("-");
+      }
+
+      private void btnMultiplicar_Click(object sender, EventArgs e)
+      {
+         Operacao("*");
+      }
+
+      private void btnDividir_Click(object sender, EventArgs e)
+      {
+         Operacao("/");
+      }
+
       private void btnLimpar_Click(object sender, EventArgs e)
       {
          txtDisplay.Text = "0";
          primeiroNumero = true;
+      }
+
+      private void btnVirgula_Click(object sender, EventArgs e)
+      {
+         Input(",");
       }
 
       private void btnApagar_Click(object sender, EventArgs e)
@@ -75,6 +110,11 @@ namespace Calculadora
          {
             txtDisplay.Text = txtDisplay.Text.Remove(txtDisplay.Text.Length - 1);
             if (txtDisplay.Text.Length == 0)
+            {
+               txtDisplay.Text = "0";
+               primeiroNumero = true;
+            }
+            else if (txtDisplay.Text == "-")
             {
                txtDisplay.Text = "0";
                primeiroNumero = true;
@@ -91,30 +131,44 @@ namespace Calculadora
          }
          txtDisplay.Text += valor;
       }
+
       private void Operacao(string operador)
       {
          if (operador == "+")
          {
-            valorAnterior += Convert.ToDouble(txtDisplay.Text);
-            primeiroNumero = true;
+            memoria = Convert.ToDouble(txtDisplay.Text);
             ultimaOperacao = "+";
+         }
+         else if (operador == "-")
+         {
+            memoria = Convert.ToDouble(txtDisplay.Text);
+            ultimaOperacao = "-";
+         }
+         else if (operador == "*")
+         {
+            memoria = Convert.ToDouble(txtDisplay.Text);
+            ultimaOperacao = "*";
+         }
+         else if (operador == "/")
+         {
+            memoria = Convert.ToDouble(txtDisplay.Text);
+            ultimaOperacao = "/";
          }
          else if (operador == "=")
          {
-            valorAnterior += Convert.ToDouble(txtDisplay.Text);
-            txtDisplay.Text = valorAnterior.ToString();
-            valorAnterior = 0;
+            if (ultimaOperacao == "+")
+               memoria = memoria + Convert.ToDouble(txtDisplay.Text);
+            else if (ultimaOperacao == "-")
+               memoria = memoria - Convert.ToDouble(txtDisplay.Text);
+            else if (ultimaOperacao == "*")
+               memoria = memoria * Convert.ToDouble(txtDisplay.Text);
+            else if (ultimaOperacao == "/")
+               memoria = memoria / Convert.ToDouble(txtDisplay.Text);
+
+            txtDisplay.Text = memoria.ToString();
+            memoria = 0;
          }
-      }
-
-      private void btnSomar_Click(object sender, EventArgs e)
-      {
-         Operacao("+");
-      }
-
-      private void btnResultado_Click(object sender, EventArgs e)
-      {
-         Operacao("=");
+         primeiroNumero = true;
       }
    }
 }
