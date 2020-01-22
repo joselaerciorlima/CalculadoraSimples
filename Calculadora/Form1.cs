@@ -5,9 +5,8 @@ namespace Calculadora
 {
    public partial class Form1 : Form
    {
-      bool primeiroNumero = true, usandoVirgula = false;
-      double memoria = 0;
-      string ultimaOperacao;
+      string operacao = "";
+      bool operacaoSelecionada = false;
 
       public Form1()
       {
@@ -72,7 +71,25 @@ namespace Calculadora
 
       private void btnResultado_Click(object sender, EventArgs e)
       {
-         Operacao("=");
+         switch (operacao)
+         {
+            case "+":
+               lblValor.Text = (Convert.ToDouble(lblValor.Text) + Convert.ToDouble(txtDisplay.Text)).ToString();
+               break;
+            case "-":
+               lblValor.Text = (Convert.ToDouble(lblValor.Text) - Convert.ToDouble(txtDisplay.Text)).ToString();
+               break;
+            case "*":
+               lblValor.Text = (Convert.ToDouble(lblValor.Text) * Convert.ToDouble(txtDisplay.Text)).ToString();
+               break;
+            case "/":
+               lblValor.Text = (Convert.ToDouble(lblValor.Text) / Convert.ToDouble(txtDisplay.Text)).ToString();
+               break;
+         }
+
+         txtDisplay.Text = lblValor.Text;
+         lblValor.Text = "0";
+         operacaoSelecionada = false;
       }
 
       private void btnNegativo_Click(object sender, EventArgs e)
@@ -98,13 +115,24 @@ namespace Calculadora
       private void btnLimpar_Click(object sender, EventArgs e)
       {
          txtDisplay.Text = "0";
-         primeiroNumero = true;
-         usandoVirgula = false;
+         lblValor.Text = "0";
+         operacao = "";
       }
 
       private void btnVirgula_Click(object sender, EventArgs e)
       {
-         Input(",");
+         if (operacaoSelecionada == false)
+         {
+            txtDisplay.Text = "0";
+         }
+
+         if (txtDisplay.Text.IndexOf(",") <= 0)
+         {
+            if (txtDisplay.Text == "0")
+               Input("0,");
+            else
+               Input(",");
+         }
       }
 
       private void btnApagar_Click(object sender, EventArgs e)
@@ -115,82 +143,52 @@ namespace Calculadora
             if (txtDisplay.Text.Length == 0)
             {
                txtDisplay.Text = "0";
-               primeiroNumero = true;
-            }
-            else if (txtDisplay.Text == "-")
-            {
-               txtDisplay.Text = "0";
-               primeiroNumero = true;
+               lblValor.Text = "0";
+               operacao = "";
             }
          }
       }
 
       private void Input(string valor)
       {
-         //VERIFICAR A PARTE DA VIRGULA
-         if (primeiroNumero)
-         {
+         if (txtDisplay.Text == "0" || operacaoSelecionada == true)
             txtDisplay.Text = "";
-            primeiroNumero = false;
-         }
-         if (txtDisplay.Text.Length <= 11)
-         {
-            if (valor == ",")
-            {
-               if (usandoVirgula)
-               {
-                  return;
-               }
-               if (txtDisplay.Text == "")
-               {
-                  txtDisplay.Text = "0" + valor;
-                  usandoVirgula = true;
-                  return;
-               }
-               usandoVirgula = true;
-            }
-            txtDisplay.Text += valor;
-         }
+
+         operacaoSelecionada = false;
+         txtDisplay.Text += valor;
 
       }
 
       private void Operacao(string operador)
       {
-         if (operador == "+")
-         {
-            memoria = Convert.ToDouble(txtDisplay.Text);
-            ultimaOperacao = "+";
-         }
-         else if (operador == "-")
-         {
-            memoria = Convert.ToDouble(txtDisplay.Text);
-            ultimaOperacao = "-";
-         }
-         else if (operador == "*")
-         {
-            memoria = Convert.ToDouble(txtDisplay.Text);
-            ultimaOperacao = "*";
-         }
-         else if (operador == "/")
-         {
-            memoria = Convert.ToDouble(txtDisplay.Text);
-            ultimaOperacao = "/";
-         }
-         else if (operador == "=")
-         {
-            if (ultimaOperacao == "+")
-               memoria = memoria + Convert.ToDouble(txtDisplay.Text);
-            else if (ultimaOperacao == "-")
-               memoria = memoria - Convert.ToDouble(txtDisplay.Text);
-            else if (ultimaOperacao == "*")
-               memoria = memoria * Convert.ToDouble(txtDisplay.Text);
-            else if (ultimaOperacao == "/")
-               memoria = memoria / Convert.ToDouble(txtDisplay.Text);
 
-            txtDisplay.Text = memoria.ToString();
-            memoria = 0;
+         operacaoSelecionada = true;
+
+         switch (operacao)
+         {
+            case "+":
+               lblValor.Text = (Convert.ToDouble(lblValor.Text) + Convert.ToDouble(txtDisplay.Text)).ToString();
+               txtDisplay.Text = lblValor.Text;
+               break;
+            case "-":
+               lblValor.Text = (Convert.ToDouble(lblValor.Text) - Convert.ToDouble(txtDisplay.Text)).ToString();
+               txtDisplay.Text = lblValor.Text;
+               break;
+            case "*":
+               lblValor.Text = (Convert.ToDouble(lblValor.Text) * Convert.ToDouble(txtDisplay.Text)).ToString();
+               txtDisplay.Text = lblValor.Text;
+               break;
+            case "/":
+               lblValor.Text = (Convert.ToDouble(lblValor.Text) / Convert.ToDouble(txtDisplay.Text)).ToString();
+               txtDisplay.Text = lblValor.Text;
+               break;
+            default:
+               lblValor.Text = txtDisplay.Text;
+               break;
          }
-         primeiroNumero = true;
+
+         operacao = operador;
+
       }
    }
 }

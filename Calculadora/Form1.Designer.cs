@@ -49,6 +49,7 @@
          this.btnApagar = new System.Windows.Forms.Button();
          this.btnMultiplicar = new System.Windows.Forms.Button();
          this.btnLimpar = new System.Windows.Forms.Button();
+         this.lblValor = new System.Windows.Forms.Label();
          this.SuspendLayout();
          // 
          // txtDisplay
@@ -360,12 +361,25 @@
          this.btnLimpar.UseVisualStyleBackColor = false;
          this.btnLimpar.Click += new System.EventHandler(this.btnLimpar_Click);
          // 
+         // lblValor
+         // 
+         this.lblValor.AutoSize = true;
+         this.lblValor.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         this.lblValor.ForeColor = System.Drawing.Color.Gray;
+         this.lblValor.Location = new System.Drawing.Point(12, 16);
+         this.lblValor.Name = "lblValor";
+         this.lblValor.Size = new System.Drawing.Size(18, 20);
+         this.lblValor.TabIndex = 20;
+         this.lblValor.Text = "0";
+         this.lblValor.Visible = false;
+         // 
          // Form1
          // 
          this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
          this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
          this.BackColor = System.Drawing.Color.LightGray;
          this.ClientSize = new System.Drawing.Size(376, 430);
+         this.Controls.Add(this.lblValor);
          this.Controls.Add(this.txtDisplay);
          this.Controls.Add(this.btnResultado);
          this.Controls.Add(this.btnSomar);
@@ -419,6 +433,7 @@
       private System.Windows.Forms.Button btnApagar;
       private System.Windows.Forms.Button btnMultiplicar;
       private System.Windows.Forms.Button btnLimpar;
-   }
+        private System.Windows.Forms.Label lblValor;
+    }
 }
 
