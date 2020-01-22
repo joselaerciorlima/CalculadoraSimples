@@ -57,6 +57,7 @@
          this.txtDisplay.BorderStyle = System.Windows.Forms.BorderStyle.None;
          this.txtDisplay.Font = new System.Drawing.Font("Arial", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
          this.txtDisplay.Location = new System.Drawing.Point(12, 16);
+         this.txtDisplay.MaxLength = 12;
          this.txtDisplay.Name = "txtDisplay";
          this.txtDisplay.ReadOnly = true;
          this.txtDisplay.Size = new System.Drawing.Size(352, 56);

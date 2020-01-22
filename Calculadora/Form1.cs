@@ -5,12 +5,14 @@ namespace Calculadora
 {
    public partial class Form1 : Form
    {
-      bool primeiroNumero = true;
+      bool primeiroNumero = true, usandoVirgula = false;
       double memoria = 0;
       string ultimaOperacao;
+
       public Form1()
       {
          InitializeComponent();
+         txtDisplay.MaxLength = 12;
       }
 
       private void btnZero_Click(object sender, EventArgs e)
@@ -97,6 +99,7 @@ namespace Calculadora
       {
          txtDisplay.Text = "0";
          primeiroNumero = true;
+         usandoVirgula = false;
       }
 
       private void btnVirgula_Click(object sender, EventArgs e)
@@ -124,12 +127,31 @@ namespace Calculadora
 
       private void Input(string valor)
       {
+         //VERIFICAR A PARTE DA VIRGULA
          if (primeiroNumero)
          {
             txtDisplay.Text = "";
             primeiroNumero = false;
          }
-         txtDisplay.Text += valor;
+         if (txtDisplay.Text.Length <= 11)
+         {
+            if (valor == ",")
+            {
+               if (usandoVirgula)
+               {
+                  return;
+               }
+               if (txtDisplay.Text == "")
+               {
+                  txtDisplay.Text = "0" + valor;
+                  usandoVirgula = true;
+                  return;
+               }
+               usandoVirgula = true;
+            }
+            txtDisplay.Text += valor;
+         }
+
       }
 
       private void Operacao(string operador)
